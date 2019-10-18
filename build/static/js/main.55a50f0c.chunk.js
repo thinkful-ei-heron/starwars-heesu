@@ -1,0 +1,2 @@
+(this.webpackJsonpstarwars=this.webpackJsonpstarwars||[]).push([[0],[,,,function(t,e,n){t.exports=n(11)},,,,,function(t,e,n){},function(t,e,n){t.exports=n.p+"static/media/logo.25bf045c.svg"},function(t,e,n){},function(t,e,n){"use strict";n.r(e);var a=n(0),r=n.n(a),s=n(2),c=n.n(s);n(8),n(9),n(10);var o=function(){return r.a.createElement("div",{className:"App"},r.a.createElement("h1",null,"Starwars App"))};c.a.render(r.a.createElement(o,null),document.getElementById("root"))}],[[3,1,2]]]);
+//# sourceMappingURL=main.55a50f0c.chunk.js.map
