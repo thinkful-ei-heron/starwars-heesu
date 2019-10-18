@@ -12,13 +12,12 @@ class Starwars extends React.Component {
                 touched: false,
             }
         }
-    }
+    };
 
     handleSubmit = (event) => {
         event.preventDefault();
         const {searchName} = this.state;
-        this.props.handleSearchSubmit(searchName);
-        console.log(searchName);
+        this.props.handleSearchSubmit(searchName.value);
         
         event.target.searchName.value='';
         this.setState({

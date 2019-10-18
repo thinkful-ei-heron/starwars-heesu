@@ -1,20 +1,23 @@
 import React from 'react';
 import './App.css';
 import Starwars from './Starwars/Starwars';
+import ResultList from './ResultList/ResultList';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state={
       searchName: {
-        results: [],
+        results: null,
         error: null,
+        search: false,
       }
     }
   }
 
   handleSearchSubmit = (name) => {
-    fetch(`https://swapi.co/api/people?search=${name}`)
+    const API_URL = (`https://swapi.co/api/people?search=${name}`)
+    fetch(API_URL)
     .then(res => {
       if(!res.ok) {
         throw new Error(res.statusText)
@@ -22,12 +25,20 @@ class App extends React.Component {
       return res.json()
     })
     .then(data => {
-      this.setState({
-        results: data.results.map(result => {
-          console.log(result);
-          return {name: result.name}
+      console.log(data);
+      if(data.count === 0) {
+        this.setState({
+          results: null,
+          search: true,
         })
-      })
+      } else {
+        this.setState({
+          search: true,
+          results: data.results.map(result => {
+            return result;
+          })
+        })
+      }
     })
     .catch(err => {
       this.setState ({
@@ -36,13 +47,13 @@ class App extends React.Component {
     })
   };
 
-  //nameApi
-
   render() {
+    console.log(this.state.results)
     return (
       <main className="App">
-        <div>Starwars App</div>
-        <Starwars handleSearchSubmit={this.handleSearchSubmit} />
+        <h1>StarWars Character App</h1>
+        <Starwars handleSearchSubmit={this.handleSearchSubmit} />      
+        <ResultList results={this.state.results}/>
       </main>
     )
   };
