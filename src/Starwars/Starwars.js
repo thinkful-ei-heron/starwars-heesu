@@ -43,7 +43,7 @@ class Starwars extends React.Component {
     render() {
         const searchNameError = this.validateName();
         return (
-            <form onSubmit={(event) => this.handleSubmit(event)}>
+            <form onSubmit={(event) => this.handleSubmit(event)}>         
                 <label htmlFor='searchName'> Search Name: </label>
                 <input id='searchName' type='text'
                     onChange={(e) => this.updateNameSearch(e.target.value)} />

@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import Starwars from './Starwars/Starwars';
 import ResultList from './ResultList/ResultList';
+import Spinning from './Spinning';
+import ErrorBoundary from './ErrorBundary';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,11 +13,16 @@ class App extends React.Component {
         results: null,
         error: null,
         search: false,
+        loading: false,
       }
     }
   }
 
   handleSearchSubmit = (name) => {
+    this.setState({
+      lodaing: true
+    })
+
     const API_URL = (`https://swapi.co/api/people?search=${name}`)
     fetch(API_URL)
     .then(res => {
@@ -52,8 +59,18 @@ class App extends React.Component {
     return (
       <main className="App">
         <h1>StarWars Character App</h1>
-        <Starwars handleSearchSubmit={this.handleSearchSubmit} />      
-        <ResultList results={this.state.results}/>
+        {this.state.error && <h2> Error has occurred: {this.state.error}</h2>}
+
+        <ErrorBoundary>
+          <Starwars handleSearchSubmit={this.handleSearchSubmit} />  
+        </ErrorBoundary>
+
+          {this.state.loading && <Spinning />}
+        
+        <ErrorBoundary>
+          <ResultList results={this.state.results}/>
+        </ErrorBoundary>     
+        
       </main>
     )
   };
